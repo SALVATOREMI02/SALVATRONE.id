@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Absensi RFID</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <!-- Dashboard Header dengan Logo Lingkaran -->
+            <div class="dashboard-header">
+                <div class="logo-container">
+                    <img src="logo sekolah.jpeg" alt="Logo SMK Mitra Industrial" class="school-logo">
+                </div>
+
+                <div class="dashboard-title">
+                    <h1>Dashboard Absensi RFID</h1>
+                    <p>Sistem Monitoring Kehadiran Real-time</p>
+                    <div class="school-name">SMK Mitra Industri 02 Pati</div>
+                    <div class="school-info">Kabupaten Pati</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FILTER CONTAINER DIHAPUS DARI SINI -->
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <h3 id="total">0</h3>
+                <p>Total Kehadiran</p>
+            </div>
+            <div class="stat-card" style="background: linear-gradient(135deg, #4cc9f0, #4895ef);">
+                <h3 id="today">0</h3>
+                <p>Hadir Hari Ini</p>
+            </div>
+            <div class="stat-card" style="background: linear-gradient(135deg, #f8961e, #f9844a);">
+                <h3 id="lastUpdate">-</h3>
+                <p>Update Terakhir</p>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-primary" onclick="refreshData()">
+                Refresh Data
+            </button>
+            <button class="btn btn-success" onclick="exportToCSV()">
+                Export ke CSV
+            </button>
+            <button class="btn btn-warning" onclick="printTable()">
+                Print Laporan
+            </button>
+            <button class="btn btn-primary" onclick="showDateFilter()">
+                Filter Tanggal           
+            </button>
+        </div>
+
+        <div class="table-container">
+            <table id="attendanceTable">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>ID Kartu</th>
+                        <th>Nama</th>
+                        <th>Jurusan</th>
+                        <th>Angkatan</th>
+                        <th>Waktu Absen</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td colspan="7" class="loading">
+                            <div class="loading-spinner"></div>
+                            Memuat data absensi...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="last-update" id="lastUpdateText">
+            Terakhir update: -
+        </div>
+    </div>
+
+    <!-- Modal Date Filter -->
+    <div id="dateFilterModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3> Filter Data Berdasarkan Tanggal</h3>
+                <button class="close-modal" onclick="closeDateFilter()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="date-presets">
+                    <button class="preset-btn" onclick="setDatePreset('today')">Hari Ini</button>
+                    <button class="preset-btn" onclick="setDatePreset('yesterday')">Kemarin</button>
+                </div>
+                
+                <div class="date-input-group">
+                    <div style="flex: 1;">
+                        <label style="display: block; margin-bottom: 5px; color: var(--gray);">Pilih Tanggal:</label>
+                        <input type="date" id="filterDate" class="date-input">
+                    </div>
+                </div>
+                
+                <div class="date-filter-actions">
+                    <button class="btn btn-primary" onclick="applyDateFilter()" style="flex: 1;">
+                        ✅ Terapkan Filter
+                    </button>
+                    <button class="btn btn-warning" onclick="closeDateFilter()" style="flex: 1;">
+                        ❌ Batal
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
